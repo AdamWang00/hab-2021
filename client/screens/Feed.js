@@ -20,20 +20,31 @@ const Feed = (props) => {
       return;
     }
 
+    const post = {
+      type: "post",
+      user_name: "name",
+      user_image_url:
+        "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+      text:
+        "this is text this is text this is text this is text this is text this is text this is text this is text this is text this is text this is text",
+      users: [{ name: "person A" }, { name: "Person B" }],
+      numReplies: 5,
+    };
+
     const response = {
       status: 200,
       data: {
         posts: [
-          { id: 1 },
-          { id: 2 },
-          { id: 3 },
-          { id: 4 },
-          { id: 5 },
-          { id: 6 },
-          { id: 7 },
-          { id: 8 },
-          { id: 9 },
-          { id: 10 },
+          { id: 1, ...post },
+          { id: 2, ...post },
+          { id: 3, ...post },
+          { id: 4, ...post },
+          { id: 5, ...post },
+          { id: 6, ...post },
+          { id: 7, ...post },
+          { id: 8, ...post },
+          { id: 9, ...post },
+          { id: 10, ...post },
         ],
         totalPages: 5,
       },
@@ -97,7 +108,7 @@ const Feed = (props) => {
           }}
           keyExtractor={(item, index) => item.id.toString()}
           renderItem={({ item, index }) => {
-            return <Post />;
+            return <Post post={item} />;
           }}
           refreshing={isRefreshing}
           onRefresh={refresh}
