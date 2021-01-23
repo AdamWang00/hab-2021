@@ -7,7 +7,14 @@ import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import EntryNavigator from "./navigation/entry/EntryNavigator";
 import store from "./redux/store";
 
-const theme = { ...DefaultTheme };
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    // TODO: add custom colors here
+  },
+};
 
 export default function App() {
   return (
