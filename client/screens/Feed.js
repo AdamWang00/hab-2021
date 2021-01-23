@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Caption } from "react-native-paper";
 import { useSelector } from "react-redux";
 import Post from "../components/posts/Post";
 
-const browse = (props) => {
+const Feed = (props) => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -23,7 +23,18 @@ const browse = (props) => {
     const response = {
       status: 200,
       data: {
-        posts: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+        posts: [
+          { id: 1 },
+          { id: 2 },
+          { id: 3 },
+          { id: 4 },
+          { id: 5 },
+          { id: 6 },
+          { id: 7 },
+          { id: 8 },
+          { id: 9 },
+          { id: 10 },
+        ],
         totalPages: 5,
       },
     };
@@ -98,7 +109,7 @@ const browse = (props) => {
   );
 };
 
-export default browse;
+export default Feed;
 
 const styles = StyleSheet.create({
   screen: { flex: 1, alignItems: "center", padding: 20 },
