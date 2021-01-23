@@ -1,11 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import urls from "../../constants/urls";
 import { LOGIN, LOGOUT, SIGNUP } from "./types";
 
 export const signup = (name, email, password, type) => {
   return async (dispatch) => {
     try {
-      const response; //TODO: connect to backend
+      const response = {}; //TODO: connect to backend
 
       if (response.status != 201) throw new Error("Signup failed");
 
@@ -32,7 +31,7 @@ export const signup = (name, email, password, type) => {
 export const login = (email, password) => {
   return async (dispatch) => {
     try {
-      const response; // TODO: connect to backend
+      const response = {}; // TODO: connect to backend
 
       if (response.status != 200) throw new Error("Login failed");
 

@@ -1,18 +1,23 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+
 import EntryNavigator from "./navigation/entry/EntryNavigator";
 import store from "./redux/store";
+
+const theme = { ...DefaultTheme };
 
 export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
-        <NavigationContainer>
-          <EntryNavigator />
-        </NavigationContainer>
+        <PaperProvider theme={theme}>
+          <NavigationContainer theme={theme}>
+            <EntryNavigator />
+          </NavigationContainer>
+        </PaperProvider>
       </SafeAreaProvider>
     </Provider>
   );
