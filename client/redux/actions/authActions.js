@@ -1,10 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOGIN, LOGOUT, SIGNUP } from "./types";
 
-export const signup = (name, email, password, type) => {
+export const signup = (name, email, password, profilePic) => {
   return async (dispatch) => {
     try {
-      const response = {}; //TODO: connect to backend
+      // create form data
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("profilePic", profilePic);
+
+      const response = {}; //TODO: connect to backend - send form-data object
 
       if (response.status != 201) throw new Error("Signup failed");
 

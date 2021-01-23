@@ -118,7 +118,7 @@ const signup = () => {
                 signupState.inputValues.name,
                 signupState.inputValues.email,
                 signupState.inputValues.password,
-                signupState.inputValues.type
+                signupState.inputValues.profilePic
               )
             );
           }}
