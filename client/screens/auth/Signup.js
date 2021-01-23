@@ -1,20 +1,20 @@
 import React, { useReducer } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Button, Headline } from "react-native-paper";
+import { Avatar, Button, Headline } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
+import * as ImagePicker from "expo-image-picker";
+
 import TextInputWrapper from "../../components/shared/TextInputWrapper";
 import { signup as signupAction } from "../../redux/actions/authActions";
 
-// TODO: ERROR CATCHING + check password match
 // initial state reducer for login form
 const signupInitialState = {
   inputValues: {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    type: "student",
+    profilePic: null,
   },
 };
 const signupReducer = (state, action) => {
@@ -44,10 +44,45 @@ const signup = () => {
   const inputChangeHandler = (input, value) => {
     dispatchSignupForm({ type: "UPDATE", input, value });
   };
+
+  // select photo
+  const pickImage = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required.");
+      return;
+    }
+
+    const pickerResult = await ImagePicker.launchImageLibraryAsync();
+    console.log(pickerResult);
+    if (pickerResult.cancelled) {
+      return;
+    }
+
+    let localUri = pickerResult.uri;
+    let filename = localUri.split("/").pop();
+
+    // Infer the type of the image
+    let match = /\.(\w+)$/.exec(filename);
+    let type = match ? `image/${match[1]}` : `image`;
+    inputChangeHandler("profilePic", { uri: localUri, name: filename, type });
+  };
+
   return (
     <SafeAreaView style={styles.screen}>
       <Headline>Create your account</Headline>
       <View style={styles.signup}>
+        <Avatar.Image
+          size={125}
+          style={{ alignSelf: "center", marginBottom: 20 }}
+          onTouchEnd={pickImage}
+          source={{
+            uri: signupState.inputValues.profilePic
+              ? signupState.inputValues.profilePic.uri
+              : "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+          }}
+        />
         <TextInputWrapper
           id="name"
           label="Name"
@@ -70,15 +105,6 @@ const signup = () => {
           autoCapitalize="none"
           secureTextEntry={true}
           value={signupState.inputValues.password}
-          onInputChange={inputChangeHandler}
-        />
-        <TextInputWrapper
-          id="confirmPassword"
-          label="Confirm Password"
-          mode="outlined"
-          autoCapitalize="none"
-          secureTextEntry={true}
-          value={signupState.inputValues.confirmPassword}
           onInputChange={inputChangeHandler}
         />
       </View>
