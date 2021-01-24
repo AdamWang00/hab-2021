@@ -51,7 +51,7 @@ const FeedItem = (props) => {
                   source={{ uri: props.item.user_image_url }}
                   size={25}
                 />
-                <Title style={{ marginLeft: 10 }}>{props.item.user_name}</Title>
+                <Subheading style={{ marginLeft: 10 }}>{props.item.user_name}</Subheading>
               </View>
               <Chip
                 textStyle={{ textTransform: "capitalize" }}
@@ -63,7 +63,7 @@ const FeedItem = (props) => {
             <Divider />
 
             <Caption>
-              {props.item.users.map((user) => user.name).join(", ")}
+              {props.item.users.map((user) => user.name)[0] + " and " + (props.item.users.length-1) + " other(s)"}
             </Caption>
 
             <Divider />
