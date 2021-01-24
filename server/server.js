@@ -39,11 +39,23 @@ app.use((req, res, next) => {
 
 // route not found
 
-app.get("/", (req, res, next) => res.json({sanity: "check"}));
+app.get("/", (req, res, next) => {
+  console.log("check");
+  res.json({sanity: "check"});
+});
 
 app.get("/test", async (req, res, next) => {
-  const r = await Post.list({users: [1], pages: 1});
-  res.json(r);
+  console.log("test");
+  try {
+    console.log("1")
+    const r = await Post.list({users: [1], pages: 1});
+    console.log("2")
+    res.json(r);
+  } catch (error) {
+    console.log("3")
+    console.log(error);
+    next(error);
+  }
 });
 
 app.post("/user/login", userControllers.login);
