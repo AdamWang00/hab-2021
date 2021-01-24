@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { Button, Headline, TextInput, Title } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
@@ -54,7 +54,10 @@ const login = (props) => {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <Headline>Welcome to Circles</Headline>
+      <Image
+        source={require("../../assets/splash.png")}
+        style={{ flex: 1, width: null, height: null, resizeMode: "contain" }}
+      />
       <View style={styles.login}>
         <TextInputWrapper
           id="email"

@@ -36,7 +36,7 @@ const EntryNavigator = () => {
   }
 
   // return screens
-  return <>{true ? <MainTabNavigator /> : <AuthNavigator />}</>;
+  return <>{userId ? <MainTabNavigator /> : <AuthNavigator />}</>;
 };
 
 export default EntryNavigator;
