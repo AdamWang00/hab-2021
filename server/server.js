@@ -41,6 +41,11 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res, next) => res.json({sanity: "check"}));
 
+app.get("/test", async (req, res, next) => {
+  const r = await Post.list({users: [1], pages: 1});
+  res.json(r);
+});
+
 app.post("/user/login", userControllers.login);
 
 app.post("/user/signup", userControllers.signup);
