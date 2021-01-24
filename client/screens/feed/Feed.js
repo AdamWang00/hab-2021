@@ -3,6 +3,8 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Caption } from "react-native-paper";
 import { useSelector } from "react-redux";
 import FeedItem from "../../components/feed/FeedItem";
+import axios from "axios";
+import urls from "../../constants/urls";
 
 const Feed = (props) => {
   const [posts, setPosts] = useState([]);
@@ -31,7 +33,7 @@ const Feed = (props) => {
       numReplies: 5,
     };
 
-    const response = {
+    const response2 = {
       status: 200,
       data: {
         posts: [
@@ -50,12 +52,15 @@ const Feed = (props) => {
       },
     };
 
-    /* TODO: CONNECT TO BACKEND
-    await axios.get(urls.server + "listings", {
-      headers: { Authorization: `Bearer ${token}` },
-      params: { page: page },
-    });
-    */
+    const response = await axios.post(
+      urls.server + "/feed",
+      { page },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    console.log(response);
 
     if (response.status == 200) {
       if (page == 1) {
@@ -106,7 +111,7 @@ const Feed = (props) => {
               <ActivityIndicator style={{ paddingVertical: 5 }} />
             );
           }}
-          keyExtractor={(item, index) => item.id.toString()}
+          keyExtractor={(item, index) => item.timestamp.toString()}
           renderItem={({ item, index }) => {
             return (
               <FeedItem

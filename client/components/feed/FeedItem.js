@@ -48,10 +48,12 @@ const FeedItem = (props) => {
                 }}
               >
                 <Avatar.Image
-                  source={{ uri: props.item.user_image_url }}
+                  source={{ uri: props.item.userImageUrl }}
                   size={25}
                 />
-                <Subheading style={{ marginLeft: 10 }}>{props.item.user_name}</Subheading>
+                <Subheading style={{ marginLeft: 10 }}>
+                  {props.item.userName}
+                </Subheading>
               </View>
               <Chip
                 textStyle={{ textTransform: "capitalize" }}
@@ -63,7 +65,10 @@ const FeedItem = (props) => {
             <Divider />
 
             <Caption>
-              {props.item.users.map((user) => user.name)[0] + " and " + (props.item.users.length-1) + " other(s)"}
+              {props.item.usersDetailed.map((user) => user.name)[0] +
+                " and " +
+                (props.item.usersDetailed.length - 1) +
+                " other(s)"}
             </Caption>
 
             <Divider />
@@ -73,7 +78,7 @@ const FeedItem = (props) => {
 
             <Divider />
             <Text style={{ fontWeight: "bold" }}>
-              {props.item.numReplies} Replies
+              {props.item.replies.length} Replies
             </Text>
           </Card.Content>
         </Card>

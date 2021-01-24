@@ -1,19 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOGIN, LOGOUT, SIGNUP } from "./types";
+import axios from "axios";
+import urls from "../../constants/urls";
 
 export const signup = (name, email, password, profilePic) => {
   return async (dispatch) => {
     try {
-      // create form data
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("password", password);
-      formData.append("profilePic", profilePic);
+      const response = await axios.post(urls.server + "user/signup", {
+        name,
+        email,
+        password,
+      });
 
-      const response = {}; //TODO: connect to backend - send form-data object
-
-      if (response.status != 201) throw new Error("Signup failed");
+      if (response.status != 201) console.log(response);
 
       // store user data in async storage
       await AsyncStorage.setItem(
@@ -38,7 +37,10 @@ export const signup = (name, email, password, profilePic) => {
 export const login = (email, password) => {
   return async (dispatch) => {
     try {
-      const response = {}; // TODO: connect to backend
+      const response = await axios.post(urls.server + "user/login", {
+        email,
+        password,
+      });
 
       if (response.status != 200) throw new Error("Login failed");
 

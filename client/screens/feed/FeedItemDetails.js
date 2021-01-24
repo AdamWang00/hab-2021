@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView} from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import {
   Avatar,
   Title,
@@ -44,7 +44,7 @@ const FeedItemDetails = (props) => {
         data: {
           type: "post",
           user_id: 1,
-          user_name: "Name",
+          user_name: "John",
           user_image_url:
             "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
           text:
@@ -61,7 +61,8 @@ const FeedItemDetails = (props) => {
               user_name: "Person B",
               user_image_url:
                 "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-              text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+              text:
+                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
             },
             {
               user_name: "Person A",
@@ -73,7 +74,8 @@ const FeedItemDetails = (props) => {
               user_name: "Person B",
               user_image_url:
                 "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-              text: " Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+              text:
+                " Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
             },
             {
               user_name: "Person B",
@@ -125,7 +127,9 @@ const FeedItemDetails = (props) => {
             source={{ uri: itemDetails.user_image_url }}
             size={25}
           />
-          <Subheading style={{ marginLeft: 10 }}>{itemDetails.user_name}</Subheading>
+          <Subheading style={{ marginLeft: 10 }}>
+            {itemDetails.user_name}
+          </Subheading>
         </View>
         <View>
           <Chip
@@ -173,5 +177,5 @@ const FeedItemDetails = (props) => {
 export default FeedItemDetails;
 
 const styles = StyleSheet.create({
-  screen: { padding: 20,},
+  screen: { padding: 20 },
 });

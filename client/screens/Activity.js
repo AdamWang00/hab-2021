@@ -40,8 +40,8 @@ const Activity = (props) => {
       },
     };
 
-    /* TODO: CONNECT TO BACKEND
-    await axios.get(urls.server + "listings", {
+    /*
+    const response = await axios.post(urls.server + "activity", {
       headers: { Authorization: `Bearer ${token}` },
       params: { page: page },
     });

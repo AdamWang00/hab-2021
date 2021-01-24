@@ -2,7 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { Avatar, Button, Divider, IconButton, Title, Subheading } from "react-native-paper";
+import {
+  Avatar,
+  Button,
+  Divider,
+  IconButton,
+  Title,
+  Subheading,
+} from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../redux/actions/authActions";
@@ -26,14 +33,14 @@ const Profile = (props) => {
       setIsLoading(true);
       let reqUserId;
 
-      if (pageUserId !== userId) {
-        // user does not own the profile page
-        setIsOwner(false);
-        reqUserId = pageUserId;
-      } else {
+      if (!pageUserId || pageUserId === userId) {
         // user is owner
         setIsOwner(true);
         reqUserId = userId;
+      } else {
+        // user is not owner
+        setIsOwner(false);
+        reqUserId = pageUserId;
       }
 
       const response = {
