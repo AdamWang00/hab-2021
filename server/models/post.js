@@ -29,6 +29,7 @@ exports.create = async ({type, userId, userName, userImageUrl, text, imageUrl, u
   const post = {
     key: postKey,
     data: {
+      postId: postKey.id,
       type,
       userId,
       userName,
@@ -51,6 +52,7 @@ exports.update = async ({postId, type}) => {
   const postKey = datastore.key([kind, datastore.int(postId)]);
   const [post] = await datastore.get(postKey);
   post.type = type;
+  post.timestamp = (new Date()).toJSON();
   await datastore.update(post);
 }
 
@@ -64,11 +66,8 @@ exports.reply = async ({postId, userId, text}) => {
   await datastore.update(post);
 }
 
-// const test = async () => {
-//   await exports.create({type: "t", userId: "ui", userName: "un", userImageUrl: "uiu", text: "t1", imageUrl: "iu", usersAdded: [{id: "1"}]})
-//   await exports.create({type: "t", userId: "ui", userName: "un", userImageUrl: "uiu", text: "t2", imageUrl: "iu", usersAdded: [{id: "1"}]})
-//   await exports.create({type: "t", userId: "ui", userName: "un", userImageUrl: "uiu", text: "t3", imageUrl: "iu", usersAdded: [{id: "3"}]})
-//   await exports.create({type: "t", userId: "ui", userName: "un", userImageUrl: "uiu", text: "t4", imageUrl: "iu", usersAdded: [{id: "1"}]})
-//   await exports.create({type: "t", userId: "ui", userName: "un", userImageUrl: "uiu", text: "t5", imageUrl: "iu", usersAdded: [{id: "1"}]})
-//   exports.list({users: ["1"], pages: 1}).then(console.log);
-// }
+// (async () => {
+//   await exports.create({type: "post", userId: "4790583889494016", userName: "Aubrey", userImageUrl: "url", text: "Enjoyed watching Tenet with the crew!", imageUrl: "iu", usersAdded: [{id: "5738709764800512", name: "John"}, {id: "5139943911325696", name: "Susan"}, {id: "4790583889494016", name: "Aubrey"}, {id: "6206230007644160", name: "Albert"}]})
+
+//   exports.list({users: ["5738709764800512"], pages: 1}).then(console.log);
+// })();

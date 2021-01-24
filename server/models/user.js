@@ -83,3 +83,7 @@ exports.connect = async ({user1Id, user2Id}) => {
   await datastore.update(user1);
   await datastore.update(user2);
 }
+
+// (async () => {
+//   await exports.register({name:"Susan", email:"susan@mail.com", password:"password", imageUrl:"url"});
+// })();
