@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Button, TextInput, RadioButton } from "react-native-paper";
+import { useSelector } from "react-redux";
 const Create = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [type, setType] = useState("");
 
+  const userId = useSelector((state) => state.auth.userId);
+
   const submit = () => {
-    const body = { title, text, type };
+    const body = { title, text, type, userId };
 
     //TODO: send request
   };

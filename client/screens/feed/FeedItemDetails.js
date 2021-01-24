@@ -7,6 +7,7 @@ import {
   Divider,
   Caption,
   Subheading,
+  Button,
 } from "react-native-paper";
 import { useSelector } from "react-redux";
 
@@ -15,6 +16,7 @@ import Loading from "../shared/Loading";
 const FeedItemDetails = (props) => {
   const { itemId } = props.route.params;
   const token = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.auth.userId);
   const [itemDetails, setItemDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,6 +43,7 @@ const FeedItemDetails = (props) => {
       const response = {
         data: {
           type: "post",
+          user_id: 1,
           user_name: "Name",
           user_image_url:
             "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
@@ -118,12 +121,14 @@ const FeedItemDetails = (props) => {
           />
           <Title style={{ marginLeft: 10 }}>{itemDetails.user_name}</Title>
         </View>
-        <Chip
-          textStyle={{ textTransform: "capitalize" }}
-          style={determineChipStyle()}
-        >
-          {itemDetails.type}
-        </Chip>
+        <View>
+          <Chip
+            textStyle={{ textTransform: "capitalize" }}
+            style={determineChipStyle()}
+          >
+            {itemDetails.type}
+          </Chip>
+        </View>
       </View>
       <Divider />
       <Caption>{itemDetails.users.map((user) => user.name).join(", ")}</Caption>
@@ -132,7 +137,9 @@ const FeedItemDetails = (props) => {
       <View style={{ paddingVertical: 10 }}>
         <Text>{itemDetails.text}</Text>
       </View>
-
+      {userId === itemDetails.user_id && (
+        <Button size="small">Convert to Memory</Button>
+      )}
       <Divider />
       <Subheading style={{ fontWeight: "bold", paddingVertical: 5 }}>
         {itemDetails.replies.length} Replies
