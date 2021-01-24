@@ -35,5 +35,5 @@ exports.signup = async (req, res, next) => {
     },
     process.env.JWT_KEY
   );
-  res.json({token});
+  res.json({token, userId});
 };
