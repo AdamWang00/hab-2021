@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Caption } from "react-native-paper";
 import { useSelector } from "react-redux";
-import Post from "../components/posts/Post";
+import FeedItem from "../../components/feed/FeedItem";
 
 const Feed = (props) => {
   const [posts, setPosts] = useState([]);
@@ -27,7 +27,7 @@ const Feed = (props) => {
         "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
       text:
         "this is text this is text this is text this is text this is text this is text this is text this is text this is text this is text this is text",
-      users: [{ name: "person A" }, { name: "Person B" }],
+      users: [{ name: "Person A" }, { name: "Person B" }],
       numReplies: 5,
     };
 
@@ -36,8 +36,8 @@ const Feed = (props) => {
       data: {
         posts: [
           { id: 1, ...post },
-          { id: 2, ...post },
-          { id: 3, ...post },
+          { id: 2, ...post, type: "plan" },
+          { id: 3, ...post, type: "memory" },
           { id: 4, ...post },
           { id: 5, ...post },
           { id: 6, ...post },
@@ -108,7 +108,7 @@ const Feed = (props) => {
           }}
           keyExtractor={(item, index) => item.id.toString()}
           renderItem={({ item, index }) => {
-            return <Post post={item} />;
+            return <FeedItem item={item} />;
           }}
           refreshing={isRefreshing}
           onRefresh={refresh}
