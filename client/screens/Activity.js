@@ -25,7 +25,7 @@ const Activity = (props) => {
       status: 200,
       data: {
         activityItems: [
-          { id: 1 },
+          { id: 1, title: "Title", text: "text" },
           { id: 2 },
           { id: 3 },
           { id: 4 },
@@ -98,7 +98,7 @@ const Activity = (props) => {
           }}
           keyExtractor={(item, index) => item.id.toString()}
           renderItem={({ item, index }) => {
-            return <ActivityItem />;
+            return <ActivityItem title={item.title} text={item.text} />;
           }}
           refreshing={isRefreshing}
           onRefresh={refresh}
