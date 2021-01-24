@@ -1,37 +1,78 @@
 import axios from "axios";
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Avatar, Button, Divider, IconButton } from "react-native-paper";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { Avatar, Button, Divider, IconButton, Title } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../redux/actions/authActions";
 
+import { logout } from "../redux/actions/authActions";
 import Loading from "./shared/Loading";
 
 // initial state reducer for user details
 const profileInitialState = {
   isLoaded: false,
-  values: { name: "", email: "", profilePicUrl: "" },
+  values: { name: "", email: "", profilePicUrl: "", connections: [] },
 };
 const profileReducer = (state, action) => {
   return { ...state, values: action.values, isLoaded: true };
 };
 
-const Profile = () => {
+const Profile = (props) => {
+  // is owner
+  const [isOwner, setIsOwner] = useState(true);
+
   // set up reducer
   const [profileState, dispatchProfile] = useReducer(
     profileReducer,
     profileInitialState
   );
 
-  // get token
+  // get token + userId
   const token = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.auth.userId);
+
+  const pageUserId = props.route.params ? props.route.params.userId : null;
 
   // load details TODO: error catching
   useEffect(() => {
     const loadDetails = async () => {
+      let reqUserId;
+
+      if (pageUserId !== userId) {
+        // user does not own the profile page
+        setIsOwner(false);
+        reqUserId = pageUserId;
+      } else {
+        // user is owner
+        setIsOwner(true);
+        reqUserId = userId;
+      }
+
       const response = {
-        data: { name: "Sample User", email: "sample@email.com" },
+        data: {
+          name: "Sample User",
+          email: "sample@email.com",
+          connections: [
+            {
+              id: 1,
+              name: "person a",
+              image_url:
+                "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+            },
+            {
+              id: 2,
+              name: "person b",
+              image_url:
+                "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+            },
+            {
+              id: 1,
+              name: "person c",
+              image_url:
+                "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+            },
+          ],
+        },
       }; // DUMMY RESPONSE
       /* TODO: CALL BACKEND
       await axios.get(urls.server + "user", {
@@ -46,6 +87,7 @@ const Profile = () => {
           profilePicUrl: response.data.profilePic
             ? response.data.profilePic.url
             : "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+          connections: response.data.connections,
         },
       });
     };
@@ -60,7 +102,7 @@ const Profile = () => {
   }
 
   return (
-    <View style={styles.screen}>
+    <ScrollView contentContainerStyle={styles.screen}>
       <Avatar.Image
         size={125}
         source={{ uri: profileState.values.profilePicUrl }}
@@ -80,18 +122,45 @@ const Profile = () => {
         <Divider />
       </View>
 
-      <View style={styles.actions}>
-        <Button icon="account-edit">Edit details</Button>
-        <Button
-          icon="logout"
-          onPress={() => {
-            dispatch(logout());
-          }}
-        >
-          Logout
-        </Button>
-      </View>
-    </View>
+      {isOwner && (
+        <View style={{ width: "100%" }}>
+          <Text>{isOwner.toString()}</Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Title>Contacts</Title>
+            <IconButton icon="plus-circle" />
+          </View>
+          <Divider />
+          {profileState.values.connections.map((connection) => (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginVertical: 5,
+              }}
+            >
+              <Avatar.Image
+                source={{ uri: connection.image_url }}
+                size={32}
+                style={{ marginRight: 10 }}
+              />
+              <Title>{connection.name}</Title>
+            </View>
+          ))}
+          <View style={styles.actions}>
+            <Button
+              icon="logout"
+              onPress={() => {
+                dispatch(logout());
+              }}
+            >
+              Logout
+            </Button>
+          </View>
+        </View>
+      )}
+    </ScrollView>
   );
 };
 
@@ -105,5 +174,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  actions: {},
+  actions: { marginTop: 10 },
 });
