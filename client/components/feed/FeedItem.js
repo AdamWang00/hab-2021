@@ -51,7 +51,7 @@ const FeedItem = (props) => {
                   source={{ uri: props.item.user_image_url }}
                   size={25}
                 />
-                <Title style={{ marginLeft: 10 }}>Name</Title>
+                <Title style={{ marginLeft: 10 }}>{props.item.user_name}</Title>
               </View>
               <Chip
                 textStyle={{ textTransform: "capitalize" }}
