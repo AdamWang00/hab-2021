@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { Avatar, Button, Divider, IconButton, Title } from "react-native-paper";
+import { Avatar, Button, Divider, IconButton, Title, Subheading } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../redux/actions/authActions";
@@ -130,7 +130,7 @@ const Profile = (props) => {
                 size={20}
                 style={{ marginRight: 10 }}
               />
-              <Title>{connection.name}</Title>
+              <Subheading>{connection.name}</Subheading>
             </View>
           ))}
           <View style={styles.actions}>
