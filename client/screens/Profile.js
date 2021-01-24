@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Avatar, Button, Divider, IconButton, Title } from "react-native-paper";
@@ -8,24 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/authActions";
 import Loading from "./shared/Loading";
 
-// initial state reducer for user details
-const profileInitialState = {
-  isLoaded: false,
-  values: { name: "", email: "", profilePicUrl: "", connections: [] },
-};
-const profileReducer = (state, action) => {
-  return { ...state, values: action.values, isLoaded: true };
-};
-
 const Profile = (props) => {
   // is owner
   const [isOwner, setIsOwner] = useState(true);
-
-  // set up reducer
-  const [profileState, dispatchProfile] = useReducer(
-    profileReducer,
-    profileInitialState
-  );
+  const [profileDetails, setProfileDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   // get token + userId
   const token = useSelector((state) => state.auth.token);
@@ -33,9 +20,10 @@ const Profile = (props) => {
 
   const pageUserId = props.route.params ? props.route.params.userId : null;
 
-  // load details TODO: error catching
+  // load details
   useEffect(() => {
     const loadDetails = async () => {
+      setIsLoading(true);
       let reqUserId;
 
       if (pageUserId !== userId) {
@@ -66,7 +54,7 @@ const Profile = (props) => {
                 "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
             },
             {
-              id: 1,
+              id: 3,
               name: "person c",
               image_url:
                 "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
@@ -80,16 +68,15 @@ const Profile = (props) => {
       });
       */
 
-      dispatchProfile({
-        values: {
-          name: response.data.name,
-          email: response.data.email,
-          profilePicUrl: response.data.profilePic
-            ? response.data.profilePic.url
-            : "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
-          connections: response.data.connections,
-        },
+      setProfileDetails({
+        name: response.data.name,
+        email: response.data.email,
+        profilePicUrl: response.data.profilePic
+          ? response.data.profilePic.url
+          : "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+        connections: response.data.connections,
       });
+      setIsLoading(false);
     };
     loadDetails();
   }, []);
@@ -97,25 +84,22 @@ const Profile = (props) => {
   const dispatch = useDispatch();
 
   // check if loading
-  if (!profileState.isLoaded) {
+  if (isLoading) {
     return <Loading />;
   }
 
   return (
     <ScrollView contentContainerStyle={styles.screen}>
-      <Avatar.Image
-        size={125}
-        source={{ uri: profileState.values.profilePicUrl }}
-      />
+      <Avatar.Image size={125} source={{ uri: profileDetails.profilePicUrl }} />
       <View style={styles.info}>
         <View style={styles.infoSection}>
           <IconButton icon="account-circle" />
-          <Text>{profileState.values.name}</Text>
+          <Text>{profileDetails.name}</Text>
         </View>
         <Divider />
         <View style={styles.infoSection}>
           <IconButton icon="email" />
-          <Text>{profileState.values.email}</Text>
+          <Text>{profileDetails.email}</Text>
         </View>
         <Divider />
         <View style={styles.infoSection}></View>
@@ -132,13 +116,14 @@ const Profile = (props) => {
             <IconButton icon="plus-circle" />
           </View>
           <Divider />
-          {profileState.values.connections.map((connection) => (
+          {profileDetails.connections.map((connection) => (
             <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
                 marginVertical: 5,
               }}
+              key={connection.id}
             >
               <Avatar.Image
                 source={{ uri: connection.image_url }}
@@ -158,6 +143,11 @@ const Profile = (props) => {
               Logout
             </Button>
           </View>
+        </View>
+      )}
+      {!isOwner && !profileDetails.isConnected && (
+        <View>
+          <Button>Send Request</Button>
         </View>
       )}
     </ScrollView>
