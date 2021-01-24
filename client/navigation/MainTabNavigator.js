@@ -3,6 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Feed from "./FeedNavigator";
+import Create from "./CreateNavigator";
 import Activity from "./ActivityNavigator";
 import Profile from "./ProfileNavigator";
 
@@ -17,6 +18,15 @@ const MainTabNavigator = () => {
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="rss" color={color} size={26} />
+          ),
+        }}
+      />
+      <MainTab.Screen
+        name="Create"
+        component={Create}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="pencil" color={color} size={26} />
           ),
         }}
       />
