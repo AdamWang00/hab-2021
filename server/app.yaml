@@ -1,1 +1,6 @@
 runtime: nodejs12
+
+env_variables:
+  GCLOUD_PROJECT: "hab2021"
+  GOOGLE_APPLICATION_CREDENTIALS: "/home/awang_yz/key.json"
+  JWT_KEY: "5791628bb0b13ce0c676dfde280ba245"

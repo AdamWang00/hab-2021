@@ -39,6 +39,8 @@ app.use((req, res, next) => {
 
 // route not found
 
+app.get("/", (req, res, next) => res.json({sanity: "check"}));
+
 app.post("/user/login", userControllers.login);
 
 app.post("/user/signup", userControllers.signup);
