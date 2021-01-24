@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const PostDetails = () => {
+const FeedItemDetails = () => {
   return (
     <View>
       <Text></Text>
@@ -9,6 +9,6 @@ const PostDetails = () => {
   );
 };
 
-export default PostDetails;
+export default FeedItemDetails;
 
 const styles = StyleSheet.create({});

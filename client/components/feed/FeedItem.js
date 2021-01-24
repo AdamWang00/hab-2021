@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import {
   Avatar,
   Card,
@@ -29,54 +29,56 @@ const FeedItem = (props) => {
   };
 
   return (
-    <View>
-      <Card>
-        <Card.Content>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingBottom: 5,
-              justifyContent: "space-between",
-            }}
-          >
+    <Pressable onPress={props.onPress}>
+      <View>
+        <Card>
+          <Card.Content>
             <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
+                paddingBottom: 5,
+                justifyContent: "space-between",
               }}
             >
-              <Avatar.Image
-                source={{ uri: props.item.user_image_url }}
-                size={25}
-              />
-              <Title style={{ marginLeft: 10 }}>Name</Title>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Avatar.Image
+                  source={{ uri: props.item.user_image_url }}
+                  size={25}
+                />
+                <Title style={{ marginLeft: 10 }}>Name</Title>
+              </View>
+              <Chip
+                textStyle={{ textTransform: "capitalize" }}
+                style={determineChipStyle()}
+              >
+                {props.item.type}
+              </Chip>
             </View>
-            <Chip
-              textStyle={{ textTransform: "capitalize" }}
-              style={determineChipStyle()}
-            >
-              {props.item.type}
-            </Chip>
-          </View>
-          <Divider />
+            <Divider />
 
-          <Caption>
-            {props.item.users.map((user) => user.name).join(", ")}
-          </Caption>
+            <Caption>
+              {props.item.users.map((user) => user.name).join(", ")}
+            </Caption>
 
-          <Divider />
-          <View style={{ paddingVertical: 10 }}>
-            <Text>{props.item.text}</Text>
-          </View>
+            <Divider />
+            <View style={{ paddingVertical: 10 }}>
+              <Text>{props.item.text}</Text>
+            </View>
 
-          <Divider />
-          <Text style={{ fontWeight: "bold" }}>
-            {props.item.numReplies} Replies
-          </Text>
-        </Card.Content>
-      </Card>
-    </View>
+            <Divider />
+            <Text style={{ fontWeight: "bold" }}>
+              {props.item.numReplies} Replies
+            </Text>
+          </Card.Content>
+        </Card>
+      </View>
+    </Pressable>
   );
 };
 

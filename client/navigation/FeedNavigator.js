@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Feed from "../screens/feed/Feed";
-import PostDetails from "../screens/feed/PostDetails";
+import FeedItemDetails from "../screens/feed/FeedItemDetails";
 
 const FeedStack = createStackNavigator();
 
@@ -9,7 +9,7 @@ const FeedNavigator = () => {
   return (
     <FeedStack.Navigator>
       <FeedStack.Screen name="Feed" component={Feed} />
-      <FeedStack.Screen name="Post Details" component={PostDetails} />
+      <FeedStack.Screen name="Details" component={FeedItemDetails} />
     </FeedStack.Navigator>
   );
 };

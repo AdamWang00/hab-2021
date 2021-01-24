@@ -108,7 +108,14 @@ const Feed = (props) => {
           }}
           keyExtractor={(item, index) => item.id.toString()}
           renderItem={({ item, index }) => {
-            return <FeedItem item={item} />;
+            return (
+              <FeedItem
+                item={item}
+                onPress={() => {
+                  props.navigation.navigate("Details", { itemId: item.id });
+                }}
+              />
+            );
           }}
           refreshing={isRefreshing}
           onRefresh={refresh}
