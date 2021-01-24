@@ -25,16 +25,41 @@ const Activity = (props) => {
       status: 200,
       data: {
         activityItems: [
-          { id: 1, title: "Title", text: "text" },
-          { id: 2 },
-          { id: 3 },
-          { id: 4 },
-          { id: 5 },
-          { id: 6 },
-          { id: 7 },
-          { id: 8 },
-          { id: 9 },
-          { id: 10 },
+          {
+            id: 1,
+            title: "Connection Request",
+            text: "Josh has sent you a connection request",
+          },
+          {
+            id: 2,
+            title: "Hack@Brown",
+            text:
+              "You have a plan with Aubrey, Susan and Albert coming up soon",
+          },
+          {
+            id: 3,
+            title: "Accepted Request",
+            text: "Aubrey has accepted your connection request",
+          },
+          {
+            id: 4,
+            title: "Memory with Aubrey",
+            text: "Aubrey has created a memory with you",
+          },
+          {
+            id: 5,
+            title: "Zoom Dinner",
+            text: "Susan has scheduled a plan with you",
+          },
+          {
+            id: 6,
+            title: "Post created",
+            text: "Albert has shared a post with you",
+          },
+          { id: 7, title: "Reply", text: "Albert has replied to your post" },
+          { id: 8, title: "Reply", text: "Susan has replied to your post" },
+          { id: 9, title: "Reply", text: "Adam has replied to your post" },
+          { id: 10, title: "Reply", text: "Albert has replied to your post" },
         ],
         totalPages: 5,
       },

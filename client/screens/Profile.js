@@ -45,24 +45,30 @@ const Profile = (props) => {
 
       const response = {
         data: {
-          name: "Sample User",
-          email: "sample@email.com",
+          name: "John",
+          email: "john@mail.com",
           connections: [
             {
               id: 1,
-              name: "person a",
+              name: "Josh",
               image_url:
                 "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
             },
             {
               id: 2,
-              name: "person b",
+              name: "Adam",
               image_url:
                 "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
             },
             {
               id: 3,
-              name: "person c",
+              name: "Albert",
+              image_url:
+                "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+            },
+            {
+              id: 4,
+              name: "Aubrey",
               image_url:
                 "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
             },
@@ -115,7 +121,6 @@ const Profile = (props) => {
 
       {isOwner && (
         <View style={{ width: "100%" }}>
-          <Text>{isOwner.toString()}</Text>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
