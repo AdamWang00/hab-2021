@@ -41,7 +41,7 @@ const FeedItemDetails = (props) => {
 
   const convertToMemory = async () => {
     await axios.put(
-      urls.server + `post/5352686694170624`,
+      urls.server + `post/6196328497414144`,
       { type: "memory" },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -102,7 +102,7 @@ const FeedItemDetails = (props) => {
         status: 200,
       };
 
-      const response = await axios.get(urls.server + `post/5352686694170624`, {
+      const response = await axios.get(urls.server + `post/6196328497414144`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(response);

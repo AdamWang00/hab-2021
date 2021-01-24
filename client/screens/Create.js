@@ -6,7 +6,7 @@ import axios from "axios";
 import urls from "../constants/urls";
 
 const Create = () => {
-  const [title, setTitle] = useState("");
+  const [people, setPeople] = useState("");
   const [text, setText] = useState("");
   const [type, setType] = useState("");
 
@@ -14,15 +14,13 @@ const Create = () => {
   const token = useSelector((state) => state.auth.token);
 
   const submit = async () => {
-    const body = { title, text, type, userId };
-
     //TODO: send request
     const response = await axios.post(
       urls.server + "post",
       {
         type: "post",
-        userId: "4790583889494016",
-        userName: "Aubrey",
+        userId: "5738709764800512",
+        userName: "John",
         userImageUrl: "url",
         text: "Enjoyed watching Tenet with the crew!",
         imageUrl: "iu",
@@ -39,7 +37,7 @@ const Create = () => {
     );
     console.log(response);
     if (response.status === 200) {
-      setTitle("");
+      setPeople("");
       setText("");
       setType("");
     }
@@ -48,11 +46,11 @@ const Create = () => {
   return (
     <ScrollView style={{ flex: 1, padding: 20 }}>
       <TextInput
-        label="Title"
+        label="People"
         style={{ marginBottom: 20 }}
-        value={title}
+        value={people}
         onChangeText={(value) => {
-          setTitle(value);
+          setPeople(value);
         }}
       />
       <TextInput
