@@ -1,0 +1,13 @@
+indexes:
+
+- kind: post
+  properties:
+  - name: users
+  - name: timestamp
+    direction: desc
+
+- kind: activity-item
+  properties:
+  - name: users
+  - name: timestamp
+    direction: desc

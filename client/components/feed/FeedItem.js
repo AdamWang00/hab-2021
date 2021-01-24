@@ -16,13 +16,13 @@ const FeedItem = (props) => {
     let backgroundColor;
     switch (props.item.type) {
       case "post":
-        backgroundColor = "#84B3F8";
+        backgroundColor = "#ADD8E6";
         break;
       case "plan":
-        backgroundColor = "#FF9E58";
+        backgroundColor = "#FED8B1";
         break;
       case "memory":
-        backgroundColor = "#4FD000";
+        backgroundColor = "#D0F0C0";
         break;
     }
     return { backgroundColor };
@@ -51,7 +51,7 @@ const FeedItem = (props) => {
                   source={{ uri: props.item.user_image_url }}
                   size={25}
                 />
-                <Title style={{ marginLeft: 10 }}>{props.item.user_name}</Title>
+                <Subheading style={{ marginLeft: 10 }}>{props.item.user_name}</Subheading>
               </View>
               <Chip
                 textStyle={{ textTransform: "capitalize" }}
@@ -63,7 +63,7 @@ const FeedItem = (props) => {
             <Divider />
 
             <Caption>
-              {props.item.users.map((user) => user.name).join(", ")}
+              {props.item.users.map((user) => user.name)[0] + " and " + (props.item.users.length-1) + " other(s)"}
             </Caption>
 
             <Divider />

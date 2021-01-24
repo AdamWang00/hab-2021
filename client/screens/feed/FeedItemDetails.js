@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView} from "react-native";
 import {
   Avatar,
   Title,
@@ -25,13 +25,13 @@ const FeedItemDetails = (props) => {
     let backgroundColor;
     switch (itemDetails.type) {
       case "post":
-        backgroundColor = "#84B3F8";
+        backgroundColor = "#ADD8E6";
         break;
       case "plan":
-        backgroundColor = "FF9E58";
+        backgroundColor = "#FED8B1";
         break;
       case "memory":
-        backgroundColor = "#4FD000";
+        backgroundColor = "#D0F0C0";
         break;
     }
     return { backgroundColor };
@@ -48,7 +48,7 @@ const FeedItemDetails = (props) => {
           user_image_url:
             "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
           text:
-            "text text text text text text text text text text text text text text text text text text text text text text text text text text text",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
           users: [{ name: "Person A" }, { name: "Person B" }],
           replies: [
             {
@@ -58,22 +58,28 @@ const FeedItemDetails = (props) => {
               text: "sounds good!",
             },
             {
-              user_name: "Person A",
+              user_name: "Person B",
               user_image_url:
                 "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-              text: "hello",
+              text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
             },
             {
               user_name: "Person A",
               user_image_url:
                 "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-              text: "hello",
+              text: "Duis aute irure dolor",
             },
             {
-              user_name: "Person A",
+              user_name: "Person B",
               user_image_url:
                 "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-              text: "hello",
+              text: " Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            },
+            {
+              user_name: "Person B",
+              user_image_url:
+                "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+              text: " Excepteur sint occaecat cupidatat non proident.",
             },
           ],
         },
@@ -100,7 +106,7 @@ const FeedItemDetails = (props) => {
   }
 
   return (
-    <View style={styles.screen}>
+    <ScrollView style={styles.screen}>
       <View
         style={{
           flexDirection: "row",
@@ -119,7 +125,7 @@ const FeedItemDetails = (props) => {
             source={{ uri: itemDetails.user_image_url }}
             size={25}
           />
-          <Title style={{ marginLeft: 10 }}>{itemDetails.user_name}</Title>
+          <Subheading style={{ marginLeft: 10 }}>{itemDetails.user_name}</Subheading>
         </View>
         <View>
           <Chip
@@ -160,12 +166,12 @@ const FeedItemDetails = (props) => {
           <Text>{reply.text}</Text>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
 export default FeedItemDetails;
 
 const styles = StyleSheet.create({
-  screen: { padding: 20 },
+  screen: { padding: 20,},
 });
