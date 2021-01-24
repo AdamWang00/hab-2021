@@ -23,13 +23,13 @@ const FeedItemDetails = (props) => {
     let backgroundColor;
     switch (itemDetails.type) {
       case "post":
-        backgroundColor = "azure";
+        backgroundColor = "#84B3F8";
         break;
       case "plan":
-        backgroundColor = "bisque";
+        backgroundColor = "FF9E58";
         break;
       case "memory":
-        backgroundColor = "greenyellow";
+        backgroundColor = "#4FD000";
         break;
     }
     return { backgroundColor };
