@@ -11,7 +11,12 @@ const MainTab = createMaterialBottomTabNavigator();
 
 const MainTabNavigator = () => {
   return (
-    <MainTab.Navigator>
+    <MainTab.Navigator
+      initialRouteName="Feed"
+      barStyle={{ backgroundColor: "#FF6B00" }}
+      activeColor="#f0edf6"
+      inactiveColor="#3e2465"
+      shifting={false}>
       <MainTab.Screen
         name="Feed"
         component={Feed}

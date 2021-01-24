@@ -127,7 +127,7 @@ const Profile = (props) => {
             >
               <Avatar.Image
                 source={{ uri: connection.image_url }}
-                size={32}
+                size={20}
                 style={{ marginRight: 10 }}
               />
               <Title>{connection.name}</Title>
