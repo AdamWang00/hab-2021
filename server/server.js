@@ -62,7 +62,7 @@ app.post("/user/login", userControllers.login);
 
 app.post("/user/signup", userControllers.signup);
 
-app.get("/feed", auth, async (req, res, next) => {
+app.post("/feed", auth, async (req, res, next) => {
   try {
     const { page } = req.body;
     const r = await Post.list({users: [req.userId], pages: page});
@@ -72,7 +72,7 @@ app.get("/feed", auth, async (req, res, next) => {
   }
 });
 
-app.get("/activity", auth, async (req, res, next) => {
+app.post("/activity", auth, async (req, res, next) => {
   try {
     const { page } = req.body;
     const r = await ActivityItem.list({userId: req.userId, pages: page});
