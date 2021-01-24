@@ -1,18 +1,48 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Alert } from "react-native";
 import { Button, TextInput, RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import urls from "../constants/urls";
+
 const Create = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [type, setType] = useState("");
 
   const userId = useSelector((state) => state.auth.userId);
+  const token = useSelector((state) => state.auth.token);
 
-  const submit = () => {
+  const submit = async () => {
     const body = { title, text, type, userId };
 
     //TODO: send request
+    const response = await axios.post(
+      urls.server + "post",
+      {
+        type: "post",
+        userId: "4790583889494016",
+        userName: "Aubrey",
+        userImageUrl: "url",
+        text: "Enjoyed watching Tenet with the crew!",
+        imageUrl: "iu",
+        usersAdded: [
+          { id: "5738709764800512", name: "John" },
+          { id: "5139943911325696", name: "Susan" },
+          { id: "4790583889494016", name: "Aubrey" },
+          { id: "6206230007644160", name: "Albert" },
+        ],
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log(response);
+    if (response.status === 200) {
+      setTitle("");
+      setText("");
+      setType("");
+    }
   };
 
   return (

@@ -10,6 +10,8 @@ import {
   Button,
 } from "react-native-paper";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import urls from "../../constants/urls";
 
 import Loading from "../shared/Loading";
 
@@ -37,10 +39,22 @@ const FeedItemDetails = (props) => {
     return { backgroundColor };
   };
 
+  const convertToMemory = async () => {
+    await axios.put(
+      urls.server + `post/5352686694170624`,
+      { type: "memory" },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    setItemDetails({ ...itemDetails, type: "memory" });
+  };
+
   useEffect(() => {
     const loadDetails = async () => {
       setIsLoading(true);
-      const response = {
+      const response2 = {
         data: {
           type: "post",
           user_id: 1,
@@ -87,11 +101,12 @@ const FeedItemDetails = (props) => {
         },
         status: 200,
       };
-      /* TODO: FETCH DATA FROM BACKEND
-      await axios.get(urls.server + `post/${listingId}`, {
+
+      const response = await axios.get(urls.server + `post/5352686694170624`, {
         headers: { Authorization: `Bearer ${token}` },
-      }); 
-*/
+      });
+      console.log(response);
+
       if (response.status == 200) {
         setItemDetails(response.data);
       } else {
@@ -128,7 +143,7 @@ const FeedItemDetails = (props) => {
             size={25}
           />
           <Subheading style={{ marginLeft: 10 }}>
-            {itemDetails.user_name}
+            {itemDetails.userName}
           </Subheading>
         </View>
         <View>
@@ -141,14 +156,18 @@ const FeedItemDetails = (props) => {
         </View>
       </View>
       <Divider />
-      <Caption>{itemDetails.users.map((user) => user.name).join(", ")}</Caption>
+      <Caption>
+        {itemDetails.usersDetailed.map((user) => user.name).join(", ")}
+      </Caption>
 
       <Divider />
       <View style={{ paddingVertical: 10 }}>
         <Text>{itemDetails.text}</Text>
       </View>
-      {userId === itemDetails.user_id && (
-        <Button size="small">Convert to Memory</Button>
+      {userId === itemDetails.userId && itemDetails.type === "plan" && (
+        <Button size="small" onPress={convertToMemory}>
+          Convert to Memory
+        </Button>
       )}
       <Divider />
       <Subheading style={{ fontWeight: "bold", paddingVertical: 5 }}>
