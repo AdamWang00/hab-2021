@@ -9,9 +9,12 @@ import store from "./redux/store";
 
 const theme = {
   ...DefaultTheme,
-  roundness: 2,
+  roundness: 10,
   colors: {
     ...DefaultTheme.colors,
+    primary: "#FF8A5B",
+    surface: "#FFFFFF",
+    
     // TODO: add custom colors here
   },
 };
